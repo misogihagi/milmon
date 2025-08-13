@@ -3,5 +3,10 @@
     "editor.formatOnSave": true,
     "git.commandsToLog": [
         "commit"
-    ]
+    ],
+    "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ]
 }
