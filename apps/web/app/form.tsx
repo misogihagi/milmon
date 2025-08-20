@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Form,
   FormControl,
@@ -8,52 +8,48 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { calculateFinalRarity } from '@/lib/rarity-calculator'; // 前回のTypeScriptコードをインポート
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { calculateFinalRarity } from "@/lib/rarity-calculator"; // 前回のTypeScriptコードをインポート
 
 // 入力データのスキーマを定義
 const formSchema = z.object({
   type: z.enum([
-    '牛乳',
-    '特別牛乳',
-    '成分調整牛乳',
-    '低脂肪牛乳',
-    '無脂肪牛乳',
-    '加工乳',
-    '乳飲料',
-    'その他',
+    "牛乳",
+    "特別牛乳",
+    "成分調整牛乳",
+    "低脂肪牛乳",
+    "無脂肪牛乳",
+    "加工乳",
+    "乳飲料",
+    "その他",
   ]),
   fatContent: z.number().min(0).max(100),
   solidContent: z.number().min(0).max(100),
-  origin: z.enum(['未記載', '国産', '産地指定', '牧場指定', '牛指定']),
-  sterilization: z.enum(['高温殺菌', '低温殺菌', '無殺菌']),
+  origin: z.enum(["未記載", "国産", "産地指定", "牧場指定", "牛指定"]),
+  sterilization: z.enum(["高温殺菌", "低温殺菌", "無殺菌"]),
   cowType: z.enum([
-    'ホルスタイン',
-    'ジャージー',
-    'ガーンジー',
-    'ブラウンスイス',
-    'エアーシャ',
+    "ホルスタイン",
+    "ジャージー",
+    "ガーンジー",
+    "ブラウンスイス",
+    "エアーシャ",
   ]),
-  breedingMethod: z.enum(['つなぎ', '放牧']),
-  feed: z.enum([
-    '粗飼料・濃厚飼料混合',
-    '濃厚飼料のみ',
-    '粗飼料のみ',
-  ]),
+  breedingMethod: z.enum(["つなぎ", "放牧"]),
+  feed: z.enum(["粗飼料・濃厚飼料混合", "濃厚飼料のみ", "粗飼料のみ"]),
 });
 
 export default function RarityCalculatorForm() {
@@ -62,14 +58,14 @@ export default function RarityCalculatorForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      type: '牛乳',
+      type: "牛乳",
       fatContent: 3.5,
       solidContent: 8.3,
-      origin: '未記載',
-      sterilization: '高温殺菌',
-      cowType: 'ホルスタイン',
-      breedingMethod: 'つなぎ',
-      feed: '粗飼料・濃厚飼料混合',
+      origin: "未記載",
+      sterilization: "高温殺菌",
+      cowType: "ホルスタイン",
+      breedingMethod: "つなぎ",
+      feed: "粗飼料・濃厚飼料混合",
     },
   });
 
@@ -126,7 +122,9 @@ export default function RarityCalculatorForm() {
                         step="0.1"
                         placeholder="例: 3.8"
                         {...field}
-                        onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                        onChange={(e) =>
+                          field.onChange(parseFloat(e.target.value))
+                        }
                       />
                     </FormControl>
                     <FormMessage />
@@ -145,7 +143,9 @@ export default function RarityCalculatorForm() {
                         step="0.1"
                         placeholder="例: 8.5"
                         {...field}
-                        onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                        onChange={(e) =>
+                          field.onChange(parseFloat(e.target.value))
+                        }
                       />
                     </FormControl>
                     <FormMessage />
@@ -218,7 +218,10 @@ export default function RarityCalculatorForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>牛種</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="牛種を選択" />
@@ -228,7 +231,9 @@ export default function RarityCalculatorForm() {
                     <SelectItem value="ホルスタイン">ホルスタイン</SelectItem>
                     <SelectItem value="ジャージー">ジャージー</SelectItem>
                     <SelectItem value="ガーンジー">ガーンジー</SelectItem>
-                    <SelectItem value="ブラウンスイス">ブラウンスイス</SelectItem>
+                    <SelectItem value="ブラウンスイス">
+                      ブラウンスイス
+                    </SelectItem>
                     <SelectItem value="エアーシャ">エアーシャ</SelectItem>
                   </SelectContent>
                 </Select>
@@ -278,7 +283,9 @@ export default function RarityCalculatorForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="粗飼料・濃厚飼料混合">粗飼料・濃厚飼料混合</SelectItem>
+                      <SelectItem value="粗飼料・濃厚飼料混合">
+                        粗飼料・濃厚飼料混合
+                      </SelectItem>
                       <SelectItem value="濃厚飼料のみ">濃厚飼料のみ</SelectItem>
                       <SelectItem value="粗飼料のみ">粗飼料のみ</SelectItem>
                     </SelectContent>

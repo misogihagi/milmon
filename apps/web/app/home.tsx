@@ -9,7 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import RarityCalculatorForm from './form'
+import RarityCalculatorForm from "./form";
 
 const App: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState("home");
@@ -121,14 +121,18 @@ const App: React.FC = () => {
           </a>
         </Button>
         <Popover>
-  <PopoverTrigger asChild>
-          <Button className="!rounded-button w-64 bg-amber-500 hover:bg-amber-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
-            <div className="text-sm font-medium">カメラを使わない場合はこちら</div>
-        </Button>
-</PopoverTrigger>
-  <PopoverContent>        <RarityCalculatorForm /></PopoverContent>
-</Popover>
-
+          <PopoverTrigger asChild>
+            <Button className="!rounded-button w-64 bg-amber-500 hover:bg-amber-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
+              <div className="text-sm font-medium">
+                カメラを使わない場合はこちら
+              </div>
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            {" "}
+            <RarityCalculatorForm />
+          </PopoverContent>
+        </Popover>
       </div>
       {/* Monster Generation Area */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-md min-h-48 flex items-center justify-center">
