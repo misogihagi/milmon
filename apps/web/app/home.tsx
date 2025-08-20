@@ -4,6 +4,13 @@ import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import RarityCalculatorForm from './form'
+
 const App: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState("home");
   const [showMonster, setShowMonster] = useState(false);
@@ -102,8 +109,8 @@ const App: React.FC = () => {
         </p>
       </div>
       {/* Camera Button */}
-      <div className="flex justify-center mb-8">
-        <Button className="!rounded-button w-32 h-32 bg-blue-500 hover:bg-blue-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
+      <div className="flex justify-between items-center flex-col mb-8 gap-4">
+        <Button className="!rounded-button w-64 h-32 bg-blue-500 hover:bg-blue-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
           <a
             href="https://readdy.ai/home/5f9c8615-5f2b-4629-b571-b0ceb073c7f8/5e35ec42-dfb9-4d46-87f0-08b9a00ee6ca"
             data-readdy="true"
@@ -113,6 +120,15 @@ const App: React.FC = () => {
             <div className="text-sm font-medium">撮影開始</div>
           </a>
         </Button>
+        <Popover>
+  <PopoverTrigger asChild>
+          <Button className="!rounded-button w-64 bg-amber-500 hover:bg-amber-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
+            <div className="text-sm font-medium">カメラを使わない場合はこちら</div>
+        </Button>
+</PopoverTrigger>
+  <PopoverContent>        <RarityCalculatorForm /></PopoverContent>
+</Popover>
+
       </div>
       {/* Monster Generation Area */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-md min-h-48 flex items-center justify-center">
