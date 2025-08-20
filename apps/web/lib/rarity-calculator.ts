@@ -48,7 +48,7 @@ const getBaseRarity = (type: keyof typeof BASE_RARITY_PROBABILITIES): Rarity => 
 const increaseRarity = (currentRarity: Rarity, increaseLevel: 1 | 2): Rarity => {
   const currentIndex = RARITY_ORDER.indexOf(currentRarity);
   const newIndex = Math.min(currentIndex + increaseLevel, RARITY_ORDER.length - 1);
-  return RARITY_ORDER[newIndex];
+  return RARITY_ORDER[newIndex] as Rarity;
 };
 
 /**
@@ -79,7 +79,7 @@ export const calculateFinalRarity = (milkData: {
     const baseRarity = getBaseRarity(milkData.type);
     const minRarityIndex = RARITY_ORDER.indexOf('SSR');
     const baseRarityIndex = RARITY_ORDER.indexOf(baseRarity);
-    return RARITY_ORDER[Math.max(baseRarityIndex, minRarityIndex)];
+    return RARITY_ORDER[Math.max(baseRarityIndex, minRarityIndex)] as Rarity;
   }
 
   // ベースレアリティの取得
