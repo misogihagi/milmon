@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
@@ -20,5 +21,12 @@ const ThemeImage = (props: Props) => {
 };
 
 export default function Home() {
-  return <HomePage />;
+  return (
+    <>
+      <Head>
+        <title>ミルモン　〜牛乳、本当はとてもおいしい 〜</title>
+      </Head>
+      <HomePage />
+    </>
+  );
 }
