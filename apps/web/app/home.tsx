@@ -111,14 +111,8 @@ const App: React.FC = () => {
       {/* Camera Button */}
       <div className="flex justify-between items-center flex-col mb-8 gap-4">
         <Button className="!rounded-button w-64 h-32 bg-blue-500 hover:bg-blue-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
-          <a
-            href="https://readdy.ai/home/5f9c8615-5f2b-4629-b571-b0ceb073c7f8/5e35ec42-dfb9-4d46-87f0-08b9a00ee6ca"
-            data-readdy="true"
-            className="text-center text-white no-underline"
-          >
             <i className="fas fa-camera text-3xl mb-2"></i>
             <div className="text-sm font-medium">撮影開始</div>
-          </a>
         </Button>
         <Popover>
           <PopoverTrigger asChild>
