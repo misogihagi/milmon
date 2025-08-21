@@ -24,8 +24,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { calculateFinalRarity } from "@/lib/rarity-calculator";
-import data from "./data"
-
+import data from "./data";
 
 // 入力データのスキーマを定義
 const formSchema = z.object({
@@ -54,7 +53,11 @@ const formSchema = z.object({
   feed: z.enum(["粗飼料・濃厚飼料混合", "濃厚飼料のみ", "粗飼料のみ"]),
 });
 
-export default function RarityCalculatorForm({handleSubmit}: {handleSubmit: (d:typeof data[0]) => void}) {
+export default function RarityCalculatorForm({
+  handleSubmit,
+}: {
+  handleSubmit: (d: (typeof data)[0]) => void;
+}) {
   const [rarityResult, setRarityResult] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -73,9 +76,11 @@ export default function RarityCalculatorForm({handleSubmit}: {handleSubmit: (d:t
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const rarity = calculateFinalRarity(values);
-    setRarityResult(rarity)
+    setRarityResult(rarity);
     const candidates = data.filter((m) => m.rarity === rarity);
-    const monster = candidates[Math.floor(Math.random() * candidates.length)] as typeof data[0]
+    const monster = candidates[
+      Math.floor(Math.random() * candidates.length)
+    ] as (typeof data)[0];
     handleSubmit(monster);
   };
 
@@ -300,7 +305,7 @@ export default function RarityCalculatorForm({handleSubmit}: {handleSubmit: (d:t
               )}
             />
           </div>
-          <Button type="submit" className="w-full" >
+          <Button type="submit" className="w-full">
             レアリティを計算
           </Button>
         </form>

@@ -15,7 +15,7 @@ import data from "./data";
 const App: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState("home");
   const [showMonster, setShowMonster] = useState(false);
-  const [monster, setMonster] = useState<typeof data[0]|null>(null);
+  const [monster, setMonster] = useState<(typeof data)[0] | null>(null);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
 
@@ -97,11 +97,13 @@ const App: React.FC = () => {
       console.log("Logout user");
     }
   };
-  const handleSubmit:(ComponentProps<typeof RarityCalculatorForm>)['handleSubmit'] = (data) => {
+  const handleSubmit: ComponentProps<
+    typeof RarityCalculatorForm
+  >["handleSubmit"] = (data) => {
     setShowMonster(true);
     setMonster(null);
     setTimeout(() => {
-    setMonster(data);
+      setMonster(data);
     }, 3000);
     setIsOpened(false);
   };
@@ -137,7 +139,7 @@ const App: React.FC = () => {
             </Button>
           </PopoverTrigger>
           <PopoverContent>
-            <RarityCalculatorForm handleSubmit={handleSubmit}/>
+            <RarityCalculatorForm handleSubmit={handleSubmit} />
           </PopoverContent>
         </Popover>
       </div>
@@ -158,24 +160,22 @@ const App: React.FC = () => {
             <Badge
               className={`text-xs px-2 py-1 ${
                 monster.rarity === "UR"
-                ? "bg-gradient-to-r from-purple-400 to-pink-500 text-white"
-                : monster.rarity === "SSR"
-                  ? "bg-gradient-to-r from-yellow-400 to-orange-500 text-white"
-                  : monster.rarity === "SR"
-                    ? "bg-gradient-to-r from-red-400 to-red-300 text-white"
-                  : monster.rarity === "R"
-                    ? "bg-gradient-to-r from-blue-400 to-blue-600 text-white"
-                  : monster.rarity === "UC"
-                    ? "bg-gradient-to-r from-green-400 to-lime-600 text-white"
-                    : "bg-gradient-to-r from-gray-400 to-slate-300 text-white"
+                  ? "bg-gradient-to-r from-purple-400 to-pink-500 text-white"
+                  : monster.rarity === "SSR"
+                    ? "bg-gradient-to-r from-yellow-400 to-orange-500 text-white"
+                    : monster.rarity === "SR"
+                      ? "bg-gradient-to-r from-red-400 to-red-300 text-white"
+                      : monster.rarity === "R"
+                        ? "bg-gradient-to-r from-blue-400 to-blue-600 text-white"
+                        : monster.rarity === "UC"
+                          ? "bg-gradient-to-r from-green-400 to-lime-600 text-white"
+                          : "bg-gradient-to-r from-gray-400 to-slate-300 text-white"
               }`}
             >
               {monster.rarity}
             </Badge>
           </div>
-        )
-        : showMonster
-        ? (
+        ) : showMonster ? (
           <div className="text-center animate-bounce">
             <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
               <i className="fas fa-star text-white text-2xl"></i>
