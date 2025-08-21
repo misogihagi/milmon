@@ -111,8 +111,8 @@ const App: React.FC = () => {
       {/* Camera Button */}
       <div className="flex justify-between items-center flex-col mb-8 gap-4">
         <Button className="!rounded-button w-64 h-32 bg-blue-500 hover:bg-blue-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
-            <i className="fas fa-camera text-3xl mb-2"></i>
-            <div className="text-sm font-medium">撮影開始</div>
+          <i className="fas fa-camera text-3xl mb-2"></i>
+          <div className="text-sm font-medium">撮影開始</div>
         </Button>
         <Popover>
           <PopoverTrigger asChild>
