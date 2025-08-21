@@ -141,6 +141,20 @@ const App: React.FC = () => {
           name="image"
           accept="image/*"
           capture="user"
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0]) {
+              const file = e.target.files[0];
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                handleSubmit(
+                  data[
+                    Math.floor(Math.random() * data.length)
+                  ] as (typeof data)[0],
+                );
+              };
+              reader.readAsDataURL(file);
+            }
+          }}
         ></Input>
         <Popover open={isOpened} onOpenChange={setIsOpened}>
           <PopoverTrigger asChild>
