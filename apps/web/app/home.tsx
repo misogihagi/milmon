@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/popover";
 import RarityCalculatorForm from "./form";
 import data from "./data";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 const App: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState("home");
@@ -126,10 +128,20 @@ const App: React.FC = () => {
       </div>
       {/* Camera Button */}
       <div className="flex justify-between items-center flex-col mb-8 gap-4">
-        <Button className="!rounded-button w-64 h-32 bg-blue-500 hover:bg-blue-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
-          <i className="fas fa-camera text-3xl mb-2"></i>
-          <div className="text-sm font-medium">撮影開始</div>
-        </Button>
+        <Label
+          htmlFor="image"
+          className="text-sm font-medium !rounded-button w-64 h-32 bg-blue-500 hover:bg-blue-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer flex items-center justify-center"
+        >
+          <span>撮影開始</span>
+        </Label>
+        <Input
+          className="hidden"
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*"
+          capture="user"
+        ></Input>
         <Popover open={isOpened} onOpenChange={setIsOpened}>
           <PopoverTrigger asChild>
             <Button className="!rounded-button w-64 bg-amber-500 hover:bg-amber-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
