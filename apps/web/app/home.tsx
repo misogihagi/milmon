@@ -123,7 +123,6 @@ const App: React.FC = () => {
             </Button>
           </PopoverTrigger>
           <PopoverContent>
-            {" "}
             <RarityCalculatorForm />
           </PopoverContent>
         </Popover>
