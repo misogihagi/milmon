@@ -1,6 +1,6 @@
 "use client";
 // The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work.
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, type ComponentProps } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,12 +10,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import RarityCalculatorForm from "./form";
+import data from "./data";
 
 const App: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState("home");
   const [showMonster, setShowMonster] = useState(false);
+  const [monster, setMonster] = useState<typeof data[0]|null>(null);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -92,6 +97,15 @@ const App: React.FC = () => {
       console.log("Logout user");
     }
   };
+  const handleSubmit:(ComponentProps<typeof RarityCalculatorForm>)['handleSubmit'] = (data) => {
+    setShowMonster(true);
+    setMonster(null);
+    setTimeout(() => {
+    setMonster(data);
+    }, 3000);
+    setIsOpened(false);
+  };
+
   const renderHomeContent = () => (
     <div className="px-4 pt-20 pb-24 min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Hero Section */}
@@ -114,7 +128,7 @@ const App: React.FC = () => {
           <i className="fas fa-camera text-3xl mb-2"></i>
           <div className="text-sm font-medium">撮影開始</div>
         </Button>
-        <Popover>
+        <Popover open={isOpened} onOpenChange={setIsOpened}>
           <PopoverTrigger asChild>
             <Button className="!rounded-button w-64 bg-amber-500 hover:bg-amber-600 text-white shadow-lg transform hover:scale-105 transition-all duration-200 cursor-pointer">
               <div className="text-sm font-medium">
@@ -123,13 +137,45 @@ const App: React.FC = () => {
             </Button>
           </PopoverTrigger>
           <PopoverContent>
-            <RarityCalculatorForm />
+            <RarityCalculatorForm handleSubmit={handleSubmit}/>
           </PopoverContent>
         </Popover>
       </div>
       {/* Monster Generation Area */}
       <div className="bg-white rounded-2xl p-6 mb-8 shadow-md min-h-48 flex items-center justify-center">
-        {showMonster ? (
+        {showMonster && monster ? (
+          <div className="text-center">
+            <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
+              <img
+                src={monster.src}
+                alt={monster.name}
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+            <h3 className="text-lg font-bold text-gray-800 mb-2">
+              {monster.name}
+            </h3>
+            <Badge
+              className={`text-xs px-2 py-1 ${
+                monster.rarity === "UR"
+                ? "bg-gradient-to-r from-purple-400 to-pink-500 text-white"
+                : monster.rarity === "SSR"
+                  ? "bg-gradient-to-r from-yellow-400 to-orange-500 text-white"
+                  : monster.rarity === "SR"
+                    ? "bg-gradient-to-r from-red-400 to-red-300 text-white"
+                  : monster.rarity === "R"
+                    ? "bg-gradient-to-r from-blue-400 to-blue-600 text-white"
+                  : monster.rarity === "UC"
+                    ? "bg-gradient-to-r from-green-400 to-lime-600 text-white"
+                    : "bg-gradient-to-r from-gray-400 to-slate-300 text-white"
+              }`}
+            >
+              {monster.rarity}
+            </Badge>
+          </div>
+        )
+        : showMonster
+        ? (
           <div className="text-center animate-bounce">
             <div className="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
               <i className="fas fa-star text-white text-2xl"></i>
